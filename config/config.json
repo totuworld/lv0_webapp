@@ -1,0 +1,13 @@
+{
+    "development": {
+        "dialect": "mssql",
+        "host":"{host}.database.windows.net",
+        "port":1433,
+        "username": "{your_username}",
+        "password": "{your_password}",
+        "dialectOptions":{
+            "encrypt": true,
+            "database":"{database}"
+        }
+    }
+}
