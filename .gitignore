@@ -90,3 +90,7 @@ fabric.properties
 
 # remove typings
 typings
+
+# remove vscode
+
+.vscode
