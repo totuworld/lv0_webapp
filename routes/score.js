@@ -43,4 +43,12 @@ router.post('/add/:id/:score', function(req, res){
 	});
 });
 
+router.get('/ranker', function (req, res) {
+	//상위 10명 랭크 정보 반환
+	redisCtrl.GetRankers(0, 9)
+	.then(function(result) {
+		res.send({result:0, Rank:result});
+	})
+});
+
 module.exports = router;
