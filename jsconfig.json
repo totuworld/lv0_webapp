@@ -2,5 +2,9 @@
 	"compilerOptions": {
 		"target": "ES6",
 		"module": "commonjs"
-	}
+	},
+	"files": [
+		"./routes/score.js",
+		"./utils/redisCtrl.js"
+	]
 }
