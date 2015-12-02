@@ -44,10 +44,30 @@ router.post('/add/:id/:score', function(req, res){
 });
 
 router.get('/ranker', function (req, res) {
+	let finalData = [];
+	function GetUserName(id, rankData) {
+		return models.User.findOne({where:{id:id}})
+		.then(function(userInfo){
+			return new Promise(function (resolve, reject) {
+				rankData['username'] = userInfo['username'];
+				finalData.push(rankData);
+				resolve();
+			});
+		});
+	}
+	
 	//상위 10명 랭크 정보 반환
 	redisCtrl.GetRankers(0, 9)
 	.then(function(result) {
-		res.send({result:0, Rank:result});
+		let promise = [];
+		for(let row of result) {
+			promise.push(GetUserName(row.id, row));
+		}
+		return Promise.all(promise);
+	})
+	.then(function() {
+		finalData.sort((a, b)=>a.Rank - b.Rank);
+		res.send({result:0, Rank:finalData});
 	})
 });
 
