@@ -22,7 +22,7 @@ exports.UpdateScore = function (id, Score) {
     return new Promise(function (resolve, reject) {
         //점수 기록.
         client.zaddAsync(redisKey, convertScore, userKeyStr)
-        .then(function(err, replies) {
+        .then(function(replies) {
             resolve(convertScore);
         });
     });
@@ -91,14 +91,12 @@ exports.GetRankWithScore = function(userScore) {
  *  GetRankers(0, 9).then( //function );
  */
 exports.GetRankers = function(min, max) {
-    let sendResult = {};
-    let RankUserID = [];
-    
+    let sendResult = [];
     function GetRankAndMakeResult(id, score) {
         return new Promise(function(resolve, reject) {
             mainThis.GetRankWithScore(score)
             .then(function(rank) {
-                sendResult[id] = { id:id*1, score:score*1, Rank:rank};
+                sendResult.push({ id:id*1, score:score*1, Rank:rank});
                 resolve();
             });
         });
@@ -109,7 +107,6 @@ exports.GetRankers = function(min, max) {
         //rangeIdAndScores는 홀수가 id이고 짝수가 score이다.
         let promiseList = []
         for(let i=0;i<rangeIdAndScores.length;i=i+2) {
-            RankUserID.push(rangeIdAndScores[i]);
             promiseList.push(GetRankAndMakeResult(rangeIdAndScores[i], rangeIdAndScores[i+1]));
         }
         
@@ -117,7 +114,8 @@ exports.GetRankers = function(min, max) {
     })
     .then(function(){
         return new Promise(function(resolve, reject) {
-            sendResult['RankUserID'] = RankUserID;
+            //오름차순 정렬.
+            sendResult.sort( (a, b)=> a.Rank - b.Rank);
             resolve(sendResult);
         });
     })
