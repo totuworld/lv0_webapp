@@ -7,6 +7,7 @@ var express = require('express');
 var router = express.Router();
 
 var models = require('../models');
+var redisCtrl = require('../utils/redisCtrl');
 
 router.post('/add/:id/:score', function(req, res){
 	let totalScore = 0;
@@ -31,6 +32,10 @@ router.post('/add/:id/:score', function(req, res){
 		//점수 증가
 		totalScore = scoreRow.score+(req.params.score*1);
 		return models.Score.update({score:totalScore}, {where:{id:scoreRow.id}});
+	})
+	.then(function(){
+		//Redis에 점수 기록
+		return redisCtrl.UpdateScore(req.params.id, totalScore);
 	})
 	.then(function(){
 		//결과 전송
