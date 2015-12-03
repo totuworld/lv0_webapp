@@ -5,6 +5,8 @@
 	},
 	"files": [
 		"./routes/score.js",
-		"./utils/redisCtrl.js"
+		"./routes/file.js",
+		"./utils/redisCtrl.js",
+		"./utils/storageCtrl.js"
 	]
 }
