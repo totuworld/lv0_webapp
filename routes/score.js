@@ -48,16 +48,6 @@ router.get('/ranker', function (req, res) {
 	function GetAllUsers(idArray) {
 		return models.User.findAll({where:{id:{$in:idArray}}});
 	}
-	function GetUserName(id, rankData) {
-		return models.User.findOne({where:{id:id}})
-		.then(function(userInfo){
-			return new Promise(function (resolve, reject) {
-				rankData['username'] = userInfo['username'];
-				finalData.push(rankData);
-				resolve();
-			});
-		});
-	}
 	
 	//상위 10명 랭크 정보 반환
 	redisCtrl.GetRankers(0, 9)
