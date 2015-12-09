@@ -45,6 +45,9 @@ router.post('/add/:id/:score', function(req, res){
 
 router.get('/ranker', function (req, res) {
 	let finalData = [];
+	function GetAllUsers(idArray) {
+		return models.User.findAll({where:{id:{$in:idArray}}});
+	}
 	function GetUserName(id, rankData) {
 		return models.User.findOne({where:{id:id}})
 		.then(function(userInfo){
@@ -59,11 +62,24 @@ router.get('/ranker', function (req, res) {
 	//상위 10명 랭크 정보 반환
 	redisCtrl.GetRankers(0, 9)
 	.then(function(result) {
-		let promise = [];
+		let idArray = [];
 		for(let row of result) {
-			promise.push(GetUserName(row.id, row));
+			idArray.push(row.id);
 		}
-		return Promise.all(promise);
+		return GetAllUsers(idArray).then(function(userRows){
+			return new Promise(function(resolve, reject){
+				for(let row of result) {
+					for(let users of userRows) {
+						if(row.id === users.id) {
+							row['username'] = users['username'];
+							finalData.push(row);
+							break;
+						}
+					}
+				}
+				resolve();
+			});
+		});
 	})
 	.then(function() {
 		finalData.sort((a, b)=>a.Rank - b.Rank);
