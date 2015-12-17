@@ -17,5 +17,5 @@ azure storage | 0.6.x | Azure Storage 사용
 
 ## 튜토리얼
 
-* [WebApp으로 만드는 게임 데이터 서버-1 1](https://github.com/totuworld/lv0_webapp/wiki/WebApp%EC%9C%BC%EB%A1%9C-%EB%A7%8C%EB%93%9C%EB%8A%94-%EA%B2%8C%EC%9E%84-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%9C%EB%B2%84-1)
-* [WebApp으로 만드는 게임 데이터 서버-2 1](https://github.com/totuworld/lv0_webapp/wiki/WebApp%EC%9C%BC%EB%A1%9C-%EB%A7%8C%EB%93%9C%EB%8A%94-%EA%B2%8C%EC%9E%84-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%9C%EB%B2%84-2)
+* [WebApp으로 만드는 게임 데이터 서버- 1](https://github.com/totuworld/lv0_webapp/wiki/WebApp%EC%9C%BC%EB%A1%9C-%EB%A7%8C%EB%93%9C%EB%8A%94-%EA%B2%8C%EC%9E%84-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%9C%EB%B2%84-1)
+* [WebApp으로 만드는 게임 데이터 서버- 2](https://github.com/totuworld/lv0_webapp/wiki/WebApp%EC%9C%BC%EB%A1%9C-%EB%A7%8C%EB%93%9C%EB%8A%94-%EA%B2%8C%EC%9E%84-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%9C%EB%B2%84-2)
